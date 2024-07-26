@@ -29,6 +29,15 @@ namespace SAOD_Kyrsach
             this.countPagesBytes = countPagesBytes;
         }
 
+        public static Book MakeBook(ByteStruct str)
+        {
+            string aut = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, str.author));
+            string tit = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, str.title));
+            string pub = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, str.publisher));
+
+            return new Book(aut,tit,pub,str.yearPublishBytes,str.countPagesBytes);
+        }
+
         private void MakeQueue()
         {
             bytes = new Queue<ByteStruct>();

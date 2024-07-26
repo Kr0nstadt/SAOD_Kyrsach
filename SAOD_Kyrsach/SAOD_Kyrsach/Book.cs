@@ -22,6 +22,16 @@ namespace SAOD_Kyrsach
             this.numPages = numPages;
         }
 
+        public Book(ByteStruct byteStr)
+        {
+            Book book = ByteStruct.MakeBook(byteStr);
+            author = book.author;
+            this.title = book.title;
+            this.publisher = book.publisher;
+            this.yearCreation = book.yearCreation;
+            this.numPages = book.numPages;
+        }
+
         public override string ToString()
         {
             return $"{author}\t{title}\t{publisher}\t{yearCreation}\t{numPages}";
