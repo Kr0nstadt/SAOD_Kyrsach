@@ -13,7 +13,7 @@ namespace SAOD_Kyrsach
         {
             books = list;
         }
-        private Queue<ByteStruct> DigitalSort(Queue<ByteStruct> list, int nByte)
+        /*private Queue<ByteStruct> DigitalSort(Queue<ByteStruct> list, int nByte)
         {
             Queue<byte[]> queue = new Queue<byte[]>();
             const int nQueues = 256;
@@ -41,6 +41,6 @@ namespace SAOD_Kyrsach
             }
 
             return queue;
-        }
+        }*/
     }
 }

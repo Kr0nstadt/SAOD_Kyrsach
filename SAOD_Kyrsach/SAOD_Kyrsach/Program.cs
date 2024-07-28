@@ -1,12 +1,15 @@
-﻿using SAOD_Kyrsach;
+﻿using System.Collections;
+using SAOD_Kyrsach;
 using System.Text;
+using SAOD_Kyrsach.BookRecord;
+using SAOD_Kyrsach.DigitalSort;
 
 class MainClass
 {
     static void Main()
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        List<Book> ListBook = new List<Book>();
+        List<IByteGetter> listBook = new List<IByteGetter>();
         using (FileStream fs = new FileStream(@"./testBase1.dat",
                    FileMode.Open))
         {
@@ -29,20 +32,26 @@ class MainClass
                     yearPublish = br.ReadInt16();
                     countPages = br.ReadInt16();
 
-                    string authorString =
+                    /*string authorString =
                         Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, author));
                     string titleString =
                         Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, title));
                     string publisherString =
-                        Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, publisher));
-                    ListBook.Add(new Book(authorString, titleString, publisherString, yearPublish, countPages));
+                        Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, publisher));*/
+                    BookRecord bookRecord = new BookRecord(author, title, publisher, yearPublish, countPages);
+                    listBook.Add(new BookRecordAdapterGetLastNameByte(bookRecord));
                 }
             }
         }
-        ListBook.Sort();
-        foreach(Book item in ListBook)
+        //ListBook.Sort();
+
+        if (listBook is IList<IByteGetter> listOfBytesGetter)
         {
-            Console.WriteLine(item);
+            DigitalSort.Sort(listOfBytesGetter);
+            foreach (BookRecordAdapterGetLastNameByte item in listBook)
+            {
+                Console.WriteLine(item);
+            }
         }
 
     }
