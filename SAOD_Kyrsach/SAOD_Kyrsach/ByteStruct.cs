@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach
 {
-    internal class ByteStruct
+    public class ByteStruct
     {
         private byte[] author;
         private byte[] title;

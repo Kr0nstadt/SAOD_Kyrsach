@@ -1,0 +1,41 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:iavm="clr-namespace:Visual"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		Width="800" Height="850"
+        x:Class="Visual.MainWindow"
+        Title="Visual">
+	<TabControl>
+		<TabControl.DataContext>
+			<iavm:Info/>
+		</TabControl.DataContext>
+		
+		<TabItem Header="База до сортировки">
+			<ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                Height="{Binding $parent[TabItem].Height}"
+                Width="{Binding $parent[TabItem].Width}">
+
+				<StackPanel>
+					<Button HorizontalAlignment="Center" Click="ButtonClicked">ЕщЁ!</Button>
+					<TextBlock Text="{Binding TextBefSort,DataType = iavm:Info}" Name="TextBlockBefSort"/>
+				</StackPanel>
+				
+			</ScrollViewer>
+		</TabItem>
+
+		<TabItem Header="База после сортировки">
+			<ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                Height="{Binding $parent[TabItem].Height}"
+                Width="{Binding $parent[TabItem].Width}">
+
+				<TextBlock Text="{Binding TextBefSort,DataType = iavm:Info}" Name="TextBlockAftSort"/>
+
+			</ScrollViewer>
+		</TabItem>
+		
+	</TabControl>
+</Window>

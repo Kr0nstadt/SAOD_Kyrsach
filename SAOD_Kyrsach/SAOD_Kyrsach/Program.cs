@@ -8,7 +8,7 @@ class MainClass
 {
     static void Main()
     {
-        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         List<IByteGetter> listBook = new List<IByteGetter>();
         using (FileStream fs = new FileStream(@"./testBase1.dat",
                    FileMode.Open))

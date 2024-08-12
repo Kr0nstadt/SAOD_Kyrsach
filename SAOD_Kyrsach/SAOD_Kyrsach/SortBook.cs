@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach
 {
-    internal class SortBook 
+    public class SortBook 
     {
         private Queue<ByteStruct> books;
         public SortBook(Queue<ByteStruct> list)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach.BookRecord
 {
-    internal class BookRecord
+    public class BookRecord
     {
         
 
@@ -27,6 +27,7 @@ namespace SAOD_Kyrsach.BookRecord
 
         public override string ToString()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             return Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author)) + " " +
             Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title)) + " " +
             Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher)) + " " +

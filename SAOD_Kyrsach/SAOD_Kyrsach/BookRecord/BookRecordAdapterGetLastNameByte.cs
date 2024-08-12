@@ -7,7 +7,7 @@ using SAOD_Kyrsach.DigitalSort;
 
 namespace SAOD_Kyrsach.BookRecord
 {
-    internal class BookRecordAdapterGetLastNameByte : IByteGetter
+    public class BookRecordAdapterGetLastNameByte : IByteGetter
     {
         public BookRecordAdapterGetLastNameByte(BookRecord bookRecord)
         {

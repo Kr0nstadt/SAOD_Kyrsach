@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach.DigitalSort
 {
-    internal static class DigitalSort
+    public static class DigitalSort
     {
         public static void Sort(IList<IByteGetter> list)
         {
             Queue<IByteGetter> queue = new Queue<IByteGetter>(list);
             const int nQueues = 256;
-            Queue<IByteGetter>[] tempQueues = new Queue<IByteGetter>[nQueues];//тут точно 256? Да, точно. Очередей должно быть по количеству чисел, которые можно представить в байте
+            Queue<IByteGetter>[] tempQueues = new Queue<IByteGetter>[nQueues];
             tempQueues = tempQueues.Select(q => new Queue<IByteGetter>()).ToArray();
             int maxBytesCount = queue.Max(x => x.CountByte);
             for (int i = 0; i < maxBytesCount; ++i)

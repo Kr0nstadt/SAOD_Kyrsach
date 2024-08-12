@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach
 {
-    internal class Book : IComparable<Book>
+    public class Book : IComparable<Book>
     {
         private string author;
         private string title;
