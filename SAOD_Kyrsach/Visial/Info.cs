@@ -43,40 +43,39 @@ namespace Visual
                 }
             }
 
-            TextInfo textBefSort = new TextInfo(_listBook, _countLine);
+            for(int i = 0; i < _listBook.Count; i++)
+            {
+                _listBef.Add((BookRecordAdapterGetLastNameByte)_listBook[i].Clone());
+            }
+            TextInfo textBefSort = new TextInfo(_listBef, 20);
             _textBefSort = textBefSort;
 
-            if (_listBook is IList<IByteGetter> listOfBytesGetter)
+
+            for (int i = 0; i < _listBook.Count; i++)
+            {
+                _listAft.Add((BookRecordAdapterGetLastNameByte)_listBook[i].Clone());
+            }
+
+            TextInfo textAftSort = new TextInfo(_listAft, 20);
+            _textAftSort = textAftSort;
+
+            if (_listAft is IList<BookRecordAdapterGetLastNameByte> listOfBytesGetter)
             {
                 DigitalSort.Sort(listOfBytesGetter);
             }
 
-            TextInfo textAftSort = new TextInfo(_listBook, _countLine);
-            _textAftSort = textAftSort;
 
         }
         public string TextBefSort => _textBefSort.ToString();
         public string TextAftSort => _textAftSort.ToString();
-        public IList<IByteGetter> ListBef => _listBef;
-        public IList<IByteGetter> ListAft => _listAft;
-        public int CountLine
-        {
-            get
-            {
-                return _countLine;
-            }
-            set
-            {
-                _countLine += value;
-            }
-        }
+        public IList<BookRecordAdapterGetLastNameByte> ListBef => _listBef;
+        public IList<BookRecordAdapterGetLastNameByte> ListAft => _listAft;
 
         private TextInfo _textAftSort;
         private TextInfo _textBefSort;
 
-        private IList<IByteGetter> _listBef;
-        private IList<IByteGetter> _listAft;
-        private List<IByteGetter> _listBook = new List<IByteGetter>();
-        private int _countLine = 20;
+        private IList<BookRecordAdapterGetLastNameByte> _listBef = new List<BookRecordAdapterGetLastNameByte>();
+        private IList<BookRecordAdapterGetLastNameByte> _listAft = new List<BookRecordAdapterGetLastNameByte>();
+        private List<BookRecordAdapterGetLastNameByte> _listBook = new List<BookRecordAdapterGetLastNameByte>();
     }
 }

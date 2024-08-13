@@ -9,7 +9,7 @@ class MainClass
     static void Main()
     {
         //Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        List<IByteGetter> listBook = new List<IByteGetter>();
+        List<BookRecordAdapterGetLastNameByte> listBook = new List<BookRecordAdapterGetLastNameByte>();
         using (FileStream fs = new FileStream(@"./testBase1.dat",
                    FileMode.Open))
         {
@@ -45,13 +45,25 @@ class MainClass
         }
         //ListBook.Sort();
 
-        if (listBook is IList<IByteGetter> listOfBytesGetter)
+        IList<BookRecordAdapterGetLastNameByte> copy = new List<BookRecordAdapterGetLastNameByte>();
+        for(int i = 0; i < listBook.Count; i++)
+        {
+            copy.Add(listBook[i]);
+        }
+
+        if (copy is IList<BookRecordAdapterGetLastNameByte> listOfBytesGetter)
         {
             DigitalSort.Sort(listOfBytesGetter);
-            foreach (BookRecordAdapterGetLastNameByte item in listBook)
-            {
-                Console.WriteLine(item);
-            }
+            
+        }
+        for(int i = 0; i< 20; i++)
+        {
+            Console.WriteLine(copy[i]);
+        }
+        Console.WriteLine();
+        for(int i = 0;i < 20; i++)
+        {
+            Console.WriteLine(listBook[i]);
         }
 
     }

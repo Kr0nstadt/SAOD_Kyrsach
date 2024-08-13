@@ -12,10 +12,19 @@ namespace Visual
         {
             InitializeComponent();
         }
-        public void ButtonClicked(object source, RoutedEventArgs args)
+        private int CountLineBef = 20;
+        private int CountLineAft = 20;
+        public void ButtonClickedBef(object source, RoutedEventArgs args)
         {
             Info info = new Info();
-            TextBlockBefSort.Text = new TextInfo(info.ListBef,info.CountLine = 20).ToString();
+            CountLineBef += 20;
+            TextBlockBefSort.Text = new TextInfo(info.ListBef,CountLineBef).ToString();
+        }
+        public void ButtonClickedAft(object source, RoutedEventArgs args)
+        {
+            Info info = new Info();
+            CountLineAft += 20;
+            TextBlockAftSort.Text = new TextInfo(info.ListAft, CountLineAft).ToString();
         }
     }
 }

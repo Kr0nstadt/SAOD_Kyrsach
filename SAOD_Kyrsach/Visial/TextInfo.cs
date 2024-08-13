@@ -14,7 +14,7 @@ namespace Visual
 {
     internal class TextInfo
     {
-        public TextInfo(IList<IByteGetter> listBook, int countPage)
+        public TextInfo(IList<BookRecordAdapterGetLastNameByte> listBook, int countPage)
         {
             _countPage = countPage;
             _listBook = listBook;
@@ -30,6 +30,6 @@ namespace Visual
             return txt;
         }
         private int _countPage;
-        private IList<IByteGetter> _listBook;
+        private IList<BookRecordAdapterGetLastNameByte> _listBook;
     }
 }

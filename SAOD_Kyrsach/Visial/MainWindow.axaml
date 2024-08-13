@@ -19,7 +19,7 @@
                 Width="{Binding $parent[TabItem].Width}">
 
 				<StackPanel>
-					<Button HorizontalAlignment="Center" Click="ButtonClicked">ЕщЁ!</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedBef">ЕщЁ!</Button>
 					<TextBlock Text="{Binding TextBefSort,DataType = iavm:Info}" Name="TextBlockBefSort"/>
 				</StackPanel>
 				
@@ -31,8 +31,11 @@
                 HorizontalScrollBarVisibility="Auto"
                 Height="{Binding $parent[TabItem].Height}"
                 Width="{Binding $parent[TabItem].Width}">
-
-				<TextBlock Text="{Binding TextBefSort,DataType = iavm:Info}" Name="TextBlockAftSort"/>
+				<StackPanel>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAft">ЕщЁ!</Button>
+					<TextBlock Text="{Binding TextAftSort,DataType = iavm:Info}" Name="TextBlockAftSort"/>
+				</StackPanel>
+				
 
 			</ScrollViewer>
 		</TabItem>

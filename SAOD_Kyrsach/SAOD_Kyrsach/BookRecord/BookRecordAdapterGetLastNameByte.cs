@@ -7,7 +7,7 @@ using SAOD_Kyrsach.DigitalSort;
 
 namespace SAOD_Kyrsach.BookRecord
 {
-    public class BookRecordAdapterGetLastNameByte : IByteGetter
+    public class BookRecordAdapterGetLastNameByte : IByteGetter, ICloneable
     {
         public BookRecordAdapterGetLastNameByte(BookRecord bookRecord)
         {
@@ -40,6 +40,11 @@ namespace SAOD_Kyrsach.BookRecord
         public override string ToString()
         {
             return _bookRecord.ToString();
+        }
+
+        public object Clone()
+        {
+            return new BookRecordAdapterGetLastNameByte(_bookRecord);
         }
 
         private BookRecord _bookRecord;

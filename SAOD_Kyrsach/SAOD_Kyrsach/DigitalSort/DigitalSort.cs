@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAOD_Kyrsach.BookRecord;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,23 @@ namespace SAOD_Kyrsach.DigitalSort
 {
     public static class DigitalSort
     {
-        public static void Sort(IList<IByteGetter> list)
+        public static void Sort(IList<BookRecordAdapterGetLastNameByte> list)
         {
-            Queue<IByteGetter> queue = new Queue<IByteGetter>(list);
+            Queue<BookRecordAdapterGetLastNameByte> queue = new Queue<BookRecordAdapterGetLastNameByte>(list);
             const int nQueues = 256;
-            Queue<IByteGetter>[] tempQueues = new Queue<IByteGetter>[nQueues];
-            tempQueues = tempQueues.Select(q => new Queue<IByteGetter>()).ToArray();
+            Queue<BookRecordAdapterGetLastNameByte>[] tempQueues = new Queue<BookRecordAdapterGetLastNameByte>[nQueues];
+            tempQueues = tempQueues.Select(q => new Queue<BookRecordAdapterGetLastNameByte>()).ToArray();
             int maxBytesCount = queue.Max(x => x.CountByte);
             for (int i = 0; i < maxBytesCount; ++i)
             {
                 while (queue.Count > 0)
                 {
-                    IByteGetter qItem = queue.Dequeue();
+                    BookRecordAdapterGetLastNameByte qItem = queue.Dequeue();
                     tempQueues[qItem.GetByte(maxBytesCount - i - 1)].Enqueue(qItem); // Сортировка по возрастанию
                     //tempQueues[nQueues - qItem.GetByte(maxBytesCount - i - 1) - 1].Enqueue(qItem); //Сортировка по убыванию
                 }
 
-                foreach (Queue<IByteGetter> q in tempQueues)
+                foreach (Queue<BookRecordAdapterGetLastNameByte> q in tempQueues)
                 {
                     while (q.Count > 0)
                     {
@@ -35,7 +36,7 @@ namespace SAOD_Kyrsach.DigitalSort
 
             list.Clear();
             
-            foreach(IByteGetter byteGetter in queue)
+            foreach(BookRecordAdapterGetLastNameByte byteGetter in queue)
             {
                 list.Add(byteGetter);
             }
