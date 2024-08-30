@@ -28,10 +28,20 @@ namespace SAOD_Kyrsach.BookRecord
         public override string ToString()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            string result = string.Format($"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author)), -12} | " +
+                                          $"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title)), -32} | " +
+                                          $"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher)),-16} | " +
+                                          $"{_yearPublishBytes,-5} | {_countPagesBytes,-5}");
+
+            /*
             return Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author)) + "\t" +
             Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title)) + "\t" +
             Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher)) + "\t" +
             _yearPublishBytes + "\t" + _countPagesBytes;
+            */
+
+            return result;
         }
 
         public byte[] Author => _author;

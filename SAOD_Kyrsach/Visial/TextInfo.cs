@@ -22,8 +22,13 @@ namespace Visual
 
         public override string ToString()
         {
-            string txt = "";
-            for(int i = 0; i < _countPage; i++)
+            string txt = $"{"Автор",-12} | {"Название",-32} | {"Издательство",-16} | {"Год",-5} | {"Количество страниц",-5}\n" +
+                         $"-----------------------------------------------------------------------------------------------\n";
+            if (_countPage > _listBook.Count)
+            {
+                _countPage = _listBook.Count;
+            }
+            for(int i = _countPage - 20; i < _countPage; i++)
             {
                 txt += _listBook[i].ToString() + "\n";
             }
