@@ -19,7 +19,14 @@
                 Width="{Binding $parent[TabItem].Width}">
 
 				<StackPanel>
-					<Button HorizontalAlignment="Center" Click="ButtonClickedBef">ЕщЁ!</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedBef">Загрузить еще 20 записей</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAllBef">Загрузить все записи</Button>
+					<TextBox Name="SearchBox" Text="Введите номер записи для поиска"
+							 FontFamily="courier new"
+                               
+							 ></TextBox>
+					<Button HorizontalAlignment="Center" Click="ButtonSearch">Поиск записи</Button>
+					<TextBlock Name="SearchRes" FontFamily="courier new"></TextBlock>
 					<TextBlock Text="{Binding TextBefSort,DataType = iavm:Info}"
 							   FontFamily="courier new"
                                Name="TextBlockBefSort"/>
@@ -34,7 +41,8 @@
                 Height="{Binding $parent[TabItem].Height}"
                 Width="{Binding $parent[TabItem].Width}">
 				<StackPanel>
-					<Button HorizontalAlignment="Center" Click="ButtonClickedAft">ЕщЁ!</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAft">Загрузить еще 20 записей</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAllAft">Загрузить все записи</Button>
 					<TextBlock Text="{Binding TextAftSort,DataType = iavm:Info}"
                                FontFamily="courier new"
                                Name="TextBlockAftSort"/>

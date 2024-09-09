@@ -17,7 +17,7 @@ namespace Visual
     {
         public Info()
         {
-            using (FileStream fs = new FileStream(@"C:\Users\iamna\YandexDisk-mileschko.sibsutis\Информатика\SAOD_Kyrsach\SAOD_Kyrsach\testBase1.dat",
+            using (FileStream fs = new FileStream(@"C:\Users\karpo\OneDrive\Рабочий стол\SAOD_Kyrsach\SAOD_Kyrsach\testBase1.dat",
                    FileMode.Open))
             {
                 byte[] author = new byte[12];

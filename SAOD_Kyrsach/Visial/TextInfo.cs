@@ -18,6 +18,13 @@ namespace Visual
         {
             _countPage = countPage;
             _listBook = listBook;
+            _key = 0;
+        }
+        public TextInfo(IList<BookRecordAdapterGetLastNameByte> listBook, int countPage, int key)
+        {
+            _countPage = countPage;
+            _listBook = listBook;
+            _key = key;
         }
 
         public override string ToString()
@@ -28,12 +35,19 @@ namespace Visual
             {
                 _countPage = _listBook.Count;
             }
+            if(_countPage < 20)
+            {
+                _countPage = 20;
+            }
             for(int i = _countPage - 20; i < _countPage; i++)
             {
+                
                 txt += _listBook[i].ToString() + "\n";
+               
             }
             return txt;
         }
+        private int _key;
         private int _countPage;
         private IList<BookRecordAdapterGetLastNameByte> _listBook;
     }
