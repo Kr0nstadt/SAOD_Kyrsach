@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using SAOD_Kyrsach;
 using System;
+using System.Text.RegularExpressions;
 using System.Linq;
 
 namespace Visual
@@ -36,14 +37,41 @@ namespace Visual
         }
         public void ButtonSearch(object source, RoutedEventArgs args)
         {
-            if(SearchBox == null)
+            string pattern = @"^\d+$";
+            
+            if(SearchBox.Text == null)
             {
                 SearchRes.Text = "Вы не ввели номер записи";
+            }
+            if (Regex.IsMatch(SearchBox.Text, pattern) == false)
+            {
+                SearchRes.Text = "Не корректные входные значения";
+                
+            }
+            else 
+            {
+                Info info = new Info();
+                SearchRes.Text = new TextInfo(info.ListBef, ((Int32.Parse(SearchBox.Text) / 20) + 1) * 20, Int32.Parse(SearchBox.Text)-1).ToString();//будет пятая снизу запись
+                //SearchRes.Text =  info.ListBef[Int32.Parse(SearchBox.Text) + 1].ToString();
+            }
+        }
+        public void ButtonSearch2(object source, RoutedEventArgs args)
+        {
+            string pattern = @"^\d+$";
+
+            if (SearchBox.Text == null)
+            {
+                SearchRes2.Text = "Вы не ввели номер записи";
+            }
+            if (Regex.IsMatch(SearchBox2.Text, pattern) == false)
+            {
+                SearchRes2.Text = "Не корректные входные значения";
+
             }
             else
             {
                 Info info = new Info();
-                SearchRes.Text = new TextInfo(info.ListAft, Int32.Parse(SearchBox.Text) + 1, Int32.Parse(SearchBox.Text) + 1).ToString();
+                SearchRes2.Text = new TextInfo(info.ListAft, ((Int32.Parse(SearchBox2.Text) / 20 ) + 1)*20 , Int32.Parse(SearchBox2.Text) - 1).ToString();//будет пятая снизу запись
                 //SearchRes.Text =  info.ListBef[Int32.Parse(SearchBox.Text) + 1].ToString();
             }
         }

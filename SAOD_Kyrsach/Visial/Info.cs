@@ -6,6 +6,7 @@ using System.Collections;
 using SAOD_Kyrsach;
 using SAOD_Kyrsach.BookRecord;
 using SAOD_Kyrsach.DigitalSort;
+using SAOD_Kyrsach.Tree;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using System.IO;
@@ -64,15 +65,35 @@ namespace Visual
                 DigitalSort.Sort(listOfBytesGetter);
             }
 
+            ReverseList(_listAft);
+            _treeStr = new TreeStr();
+            _treeStr.Add(_listAft);
+            _treeStr.InOrderTraversalLeftString();
+        }
+        private void ReverseList(IList<BookRecordAdapterGetLastNameByte> list)
+        {
+            int left = 0;
+            int right = list.Count - 1;
+            while(left < right)
+            {
+                BookRecordAdapterGetLastNameByte temp = list[left];
+                list[left] = list[right];
+                list[right] = temp;
 
+                left++;
+                right--;
+            }
         }
         public string TextBefSort => _textBefSort.ToString();
         public string TextAftSort => _textAftSort.ToString();
+        public string TextTree => _treeStr.InOrderTraversal;
         public IList<BookRecordAdapterGetLastNameByte> ListBef => _listBef;
         public IList<BookRecordAdapterGetLastNameByte> ListAft => _listAft;
 
         private TextInfo _textAftSort;
         private TextInfo _textBefSort;
+
+        private TreeStr _treeStr;
 
         private IList<BookRecordAdapterGetLastNameByte> _listBef = new List<BookRecordAdapterGetLastNameByte>();
         private IList<BookRecordAdapterGetLastNameByte> _listAft = new List<BookRecordAdapterGetLastNameByte>();

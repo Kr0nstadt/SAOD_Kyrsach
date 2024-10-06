@@ -3,6 +3,7 @@ using SAOD_Kyrsach;
 using System.Text;
 using SAOD_Kyrsach.BookRecord;
 using SAOD_Kyrsach.DigitalSort;
+using SAOD_Kyrsach.Tree;
 
 class MainClass
 {
@@ -56,7 +57,7 @@ class MainClass
             DigitalSort.Sort(listOfBytesGetter);
             
         }
-        for(int i = 0; i< 20; i++)
+        /*for(int i = 0; i< 20; i++)
         {
             Console.WriteLine(copy[i]);
         }
@@ -64,7 +65,11 @@ class MainClass
         for(int i = 0;i < 20; i++)
         {
             Console.WriteLine(listBook[i]);
-        }
+        }*/
+        TreeStr treeStr = new TreeStr();
+        treeStr.Add(copy);
+        treeStr.PrintTree();
+        treeStr.InOrderTraversalLeft();
 
     }
 }
