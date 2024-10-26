@@ -4,6 +4,7 @@ using SAOD_Kyrsach;
 using System;
 using System.Text.RegularExpressions;
 using System.Linq;
+using SAOD_Kyrsach.Tree;
 
 namespace Visual
 {
@@ -76,6 +77,29 @@ namespace Visual
             }
         }
 
+        public void ButtonTree(object source, RoutedEventArgs args)
+        {
+            string pattern = @"^\d+$";
+
+            if (SearchBox.Text == null)
+            {
+                TreeSearchRes.Text = "Вы не фамилию не замечательного человека";
+            }
+            if (Regex.IsMatch(TreeTextBox.Text, pattern) == true)
+            {
+                TreeSearchRes.Text = "Не корректные входные значения";
+
+            }
+            else
+            {
+                Info info = new Info();
+                TreeStr tree = info.TreeStr;
+                var res = tree.Search(TreeTextBox.Text.ToString());
+                TreeSearchRes.Text = tree.ToString() + "____________________________________________________________________________________________________________";
+
+
+            }
+        }
 
 
         public void ButtonClickedAllBef(object source, RoutedEventArgs args)

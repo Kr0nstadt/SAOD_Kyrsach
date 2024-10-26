@@ -10,8 +10,25 @@ namespace SAOD_Kyrsach.Tree
     public class TreeStr
     {
         public NodeTree Root;
-        
-        private IList<Node> PointCounter(IList<BookRecordAdapterGetLastNameByte> listBook)
+
+        private void BubbleSort(IList<NodeTree> list)
+        {
+            int n = list.Count;
+            for (int i = 0; i < n - 1; i++)
+            {
+                for (int j = 0; j < n - i - 1; j++)
+                {
+                    if (list[j].Compare(list[j],list[j + 1]) == -1)
+                    {
+                        // Меняем местами
+                        NodeTree temp = list[j];
+                        list[j] = list[j + 1];
+                        list[j + 1] = temp;
+                    }
+                }
+            }
+        }
+        private IList<NodeTree> PointCounter(IList<BookRecordAdapterGetLastNameByte> listBook)
         {
             Dictionary<string,int> Name = new Dictionary<string, int>();
             IList<Node> ListBookNode = new List<Node>();
@@ -40,25 +57,31 @@ namespace SAOD_Kyrsach.Tree
                     Name.Remove(ListBookNode[i].Name);
                 }
             }
-            return ResList;
+            IList<NodeTree> List = new List<NodeTree>();
+            foreach(var i in ResList)
+            {
+                List.Add(new NodeTree(i));
+            }
+            BubbleSort(List);
+            return List;
         }
 
         public void Add(IList<BookRecordAdapterGetLastNameByte> listBook)
         {
-            IList<Node> nodes = PointCounter(listBook);
+            IList<NodeTree> nodes = PointCounter(listBook);
             for (int i = 0; i < nodes.Count; i++)
             {
                 Root = AddToTree(Root, nodes[i]);
             }
         }
 
-        private NodeTree AddToTree(NodeTree node, Node value)
+        private NodeTree AddToTree(NodeTree node, NodeTree value)
         {
             if (node == null)
-                return new NodeTree(value);
+                return value;
             else
             {
-                if (value.Point >= node.Point)
+                if (value.Compare(value,node) == 1 || value.Compare(node,value) == 0)
                     node.Right = AddToTree(node.Right, value);
                 else
                     node.Left = AddToTree(node.Left, value);
@@ -67,8 +90,27 @@ namespace SAOD_Kyrsach.Tree
             return node;
         }
 
-       
-
+       public List<NodeTree> Search( string key)
+        {
+            ResSearch = "";
+            List<NodeTree> ResList = new List<NodeTree>();
+            Search(Root,key,ResList);
+            return ResList;
+        }
+        private void Search(NodeTree node, string key, List<NodeTree> list)
+        {
+            if(node == null) return;
+            if (node.Value[0] == key[0]
+                && node.Value[1] == key[1]
+                && node.Value[2] == key[2])
+            {
+                list.Add(node);
+                ResSearch += node.Value.ToString() + "\n";
+            }
+            Search(node.Left, key, list);
+            Search(node.Right, key, list);
+            
+        }
         // Метод для красивого вывода дерева
         public void PrintTree()
         {
@@ -106,7 +148,7 @@ namespace SAOD_Kyrsach.Tree
         }
         public override string ToString()
         {
-            return $"{Root.Value}({Root.Point})";
+            return ResSearch;
         }
         private void PrintTree(NodeTree node, string indent, bool last)
         {
@@ -129,6 +171,8 @@ namespace SAOD_Kyrsach.Tree
             }
         }
         private string _obh = "";
+ 
+        private string ResSearch = "";
         public string InOrderTraversal => _obh;
     }
 }

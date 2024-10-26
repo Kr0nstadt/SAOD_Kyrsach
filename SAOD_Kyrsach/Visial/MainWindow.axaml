@@ -58,6 +58,10 @@
                 Height="{Binding $parent[TabItem].Height}"
                 Width="{Binding $parent[TabItem].Width}">
 				<StackPanel>
+					<TextBox Name="TreeTextBox" Watermark="Введите фамилию не замечательного человека"
+							 FontFamily="courier new"></TextBox>
+					<Button HorizontalAlignment="Center" Click="ButtonTree">Поиск записeй</Button>
+					<TextBlock Name="TreeSearchRes" FontFamily="courier new"></TextBlock>
 					<TextBlock Text="{Binding TextTree,DataType = iavm:Info}"
                                FontFamily="courier new"
                                Name="TextBlockTree"/>

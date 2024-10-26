@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SAOD_Kyrsach.Tree
 {
-    public class Node
+    public class Node : IComparer<Node>
     {
         public int Point;
         public string Name;
@@ -25,6 +25,14 @@ namespace SAOD_Kyrsach.Tree
             Name = GetName(BookByte);
             Value = BookByte.ToString();
         }
+
+        public int Compare(Node? x, Node? y)
+        {
+            if (x.Value[0] < y.Value[0]) return -1;
+            if (x.Value[0] > y.Value[0]) { return 1; }
+            return 0;
+        }
+
         private string GetName(BookRecordAdapterGetLastNameByte BookByte)
         {
             string name = "";

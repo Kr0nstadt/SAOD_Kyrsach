@@ -67,8 +67,10 @@ namespace Visual
 
             ReverseList(_listAft);
             _treeStr = new TreeStr();
-            _treeStr.Add(_listAft);
+            _treeStr.Add(_listBef);
             _treeStr.InOrderTraversalLeftString();
+
+            
         }
         private void ReverseList(IList<BookRecordAdapterGetLastNameByte> list)
         {
@@ -87,6 +89,7 @@ namespace Visual
         public string TextBefSort => _textBefSort.ToString();
         public string TextAftSort => _textAftSort.ToString();
         public string TextTree => _treeStr.InOrderTraversal;
+        public TreeStr TreeStr => _treeStr; 
         public IList<BookRecordAdapterGetLastNameByte> ListBef => _listBef;
         public IList<BookRecordAdapterGetLastNameByte> ListAft => _listAft;
 
