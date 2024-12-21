@@ -9,9 +9,13 @@ namespace SAOD_Kyrsach.BookRecord
 {
     public class BookRecordAdapterGetLastNameByte : IByteGetter, ICloneable
     {
+        public string Title;
+        public int YearPublisher;
         public BookRecordAdapterGetLastNameByte(BookRecord bookRecord)
         {
             _bookRecord = bookRecord;
+            Title = bookRecord.title;
+            YearPublisher = bookRecord.yearPublishBytes;
 
             int count = 0;
             for (int i = 0; i < _bookRecord.Title.Length; ++i)

@@ -8,8 +8,6 @@ namespace SAOD_Kyrsach.BookRecord
 {
     public class BookRecord
     {
-        
-
         public BookRecord(byte[] author, byte[] title, byte[] publisher, short yearPublishBytes, short countPagesBytes)
         {
             _author = new byte[author.Length];
@@ -23,34 +21,39 @@ namespace SAOD_Kyrsach.BookRecord
 
             _yearPublishBytes = yearPublishBytes;
             _countPagesBytes = countPagesBytes;
-        }
 
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+             au = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author));
+             tit = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title));
+            pub = Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher));
+            yea = _yearPublishBytes.ToString();
+             cou = _countPagesBytes.ToString();
+        }
+        string au;
+        string tit;
+        string pub;
+        string yea;
+        string cou;
         public override string ToString()
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            string result = string.Format($"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author)), -12} | " +
-                                          $"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title)), -32} | " +
-                                          $"{Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher)),-16} | " +
-                                          $"{_yearPublishBytes,-5} | {_countPagesBytes,-5}");
-
-            /*
-            return Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _author)) + "\t" +
-            Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _title)) + "\t" +
-            Encoding.Unicode.GetString(Encoding.Convert(Encoding.GetEncoding(866), Encoding.Unicode, _publisher)) + "\t" +
-            _yearPublishBytes + "\t" + _countPagesBytes;
-            */
-
+            string result = au + tit + pub + yea + " "  +cou;            
             return result;
         }
-
+        private string GetName()
+        {
+            string txt = tit;
+            string[] array = txt.Split(' ');
+            return array[2];
+        }
+      
+       public string title => GetName();
         public byte[] Author => _author;
 
         public byte[] Title => _title;
 
         public byte[] Publisher => _publisher;
 
-        public short YearPublishBytes => _yearPublishBytes;
+        public short yearPublishBytes => _yearPublishBytes;
 
         public short CountPagesBytes => _countPagesBytes;
 

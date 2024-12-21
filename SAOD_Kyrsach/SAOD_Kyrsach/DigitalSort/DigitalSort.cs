@@ -21,8 +21,7 @@ namespace SAOD_Kyrsach.DigitalSort
                 while (queue.Count > 0)
                 {
                     BookRecordAdapterGetLastNameByte qItem = queue.Dequeue();
-                    tempQueues[qItem.GetByte(maxBytesCount - i - 1)].Enqueue(qItem); // Сортировка по возрастанию
-                    //tempQueues[nQueues - qItem.GetByte(maxBytesCount - i - 1) - 1].Enqueue(qItem); //Сортировка по убыванию
+                    tempQueues[qItem.GetByte(maxBytesCount - i - 1)].Enqueue(qItem); 
                 }
 
                 foreach (Queue<BookRecordAdapterGetLastNameByte> q in tempQueues)

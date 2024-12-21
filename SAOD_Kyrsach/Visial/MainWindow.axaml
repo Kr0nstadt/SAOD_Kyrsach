@@ -20,8 +20,8 @@
 
 				<StackPanel>
 					<Button HorizontalAlignment="Center" Click="ButtonClickedBef">Загрузить еще 20 записей</Button>
-					<Button HorizontalAlignment="Center" Click="ButtonClickedAllBef">Загрузить все записи</Button>
-					<TextBox Name="SearchBox" Watermark="Введите номер записи для поиска"
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAllBef">В конец</Button>
+					<TextBox Name="SearchBox" Watermark="Введите фамилию замечательного человека для поиска"
 							 FontFamily="courier new"></TextBox>
 					<Button HorizontalAlignment="Center" Click="ButtonSearch">Поиск записи</Button>
 					<TextBlock Name="SearchRes" FontFamily="courier new"></TextBlock>
@@ -40,8 +40,8 @@
                 Width="{Binding $parent[TabItem].Width}">
 				<StackPanel>
 					<Button HorizontalAlignment="Center" Click="ButtonClickedAft">Загрузить еще 20 записей</Button>
-					<Button HorizontalAlignment="Center" Click="ButtonClickedAllAft">Загрузить все записи</Button>
-					<TextBox Name="SearchBox2" Watermark="Введите номер записи для поиска"
+					<Button HorizontalAlignment="Center" Click="ButtonClickedAllAft">В конец</Button>
+					<TextBox Name="SearchBox2" Watermark="Введите фамилию замечательного человека для поиска"
 							 FontFamily="courier new"></TextBox>
 					<Button HorizontalAlignment="Center" Click="ButtonSearch2">Поиск записи</Button>
 					<TextBlock Name="SearchRes2" FontFamily="courier new"></TextBlock>
@@ -58,13 +58,27 @@
                 Height="{Binding $parent[TabItem].Height}"
                 Width="{Binding $parent[TabItem].Width}">
 				<StackPanel>
-					<TextBox Name="TreeTextBox" Watermark="Введите фамилию не замечательного человека"
+					<Button HorizontalAlignment="Center" Click="ButtonTree">Построить дерево</Button>
+					<TextBox Name="TreeTextBox2" Watermark="Введите год для поиска"
 							 FontFamily="courier new"></TextBox>
-					<Button HorizontalAlignment="Center" Click="ButtonTree">Поиск записeй</Button>
+					<Button HorizontalAlignment="Center" Click="ButtonTree2">Поиск записeй</Button>
 					<TextBlock Name="TreeSearchRes" FontFamily="courier new"></TextBlock>
 					<TextBlock Text="{Binding TextTree,DataType = iavm:Info}"
                                FontFamily="courier new"
                                Name="TextBlockTree"/>
+				</StackPanel>
+			</ScrollViewer>
+		</TabItem>
+
+		<TabItem Header="Кодировка" Width="{Binding $parent[Window].Width}">
+			<ScrollViewer
+                HorizontalScrollBarVisibility="Auto"
+                Height="{Binding $parent[TabItem].Height}"
+                Width="{Binding $parent[TabItem].Width}">
+				<StackPanel>
+					<TextBlock Text="{Binding TextCode,DataType = iavm:Info}"
+							   FontFamily="courier new"
+                               />
 				</StackPanel>
 			</ScrollViewer>
 		</TabItem>

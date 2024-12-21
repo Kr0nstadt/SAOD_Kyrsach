@@ -6,6 +6,7 @@ using System.Collections;
 using SAOD_Kyrsach;
 using SAOD_Kyrsach.BookRecord;
 using SAOD_Kyrsach.DigitalSort;
+using SAOD_Kyrsach.Code;
 using SAOD_Kyrsach.Tree;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -64,42 +65,70 @@ namespace Visual
             {
                 DigitalSort.Sort(listOfBytesGetter);
             }
+            byte[] file = File.ReadAllBytes("C:\\Users\\karpo\\OneDrive\\Рабочий стол\\SAOD_Kyrsach\\SAOD_Kyrsach\\testBase1.dat");
+            char[] filechar = System.Text.Encoding.GetEncoding(866).GetString(file).ToCharArray();//new char[file.Length];
+            
 
-            ReverseList(_listAft);
-            _treeStr = new TreeStr();
-            _treeStr.Add(_listBef);
-            _treeStr.InOrderTraversalLeftString();
 
+            string BefCode = "";
+            foreach(var item in _listBook)
+            {
+                BefCode += item.ToString();
+            }
+            LengthChar = BefCode.Length;
+
+            Dictionary<char, double> CharAndDouble = CalculateProbabilities(filechar);
+            GilbertMoore gilbert = new GilbertMoore(CharAndDouble);
+            foreach (var item in gilbert.codes)
+            {
+                _textCode += item.Value;
+            }
+
+            CodeText codeText = new CodeText( CharAndDouble, gilbert.codes, gilbert);
+            _codetext = codeText;
             
         }
-        private void ReverseList(IList<BookRecordAdapterGetLastNameByte> list)
+        static Dictionary<char, double> CalculateProbabilities(char[] inputArray)
         {
-            int left = 0;
-            int right = list.Count - 1;
-            while(left < right)
-            {
-                BookRecordAdapterGetLastNameByte temp = list[left];
-                list[left] = list[right];
-                list[right] = temp;
+            var frequencyDict = new Dictionary<char, int>();
+            int totalCount = inputArray.Length;
 
-                left++;
-                right--;
+            foreach (var c in inputArray)
+            {
+                if (frequencyDict.ContainsKey(c))
+                {
+                    frequencyDict[c]++;
+                }
+                else
+                {
+                    frequencyDict[c] = 1;
+                }
             }
+
+            var probabilityDict = new Dictionary<char, double>();
+            foreach (var kvp in frequencyDict)
+            {
+                probabilityDict[kvp.Key] = (double)kvp.Value / totalCount;
+            }
+
+            return probabilityDict;
         }
         public string TextBefSort => _textBefSort.ToString();
         public string TextAftSort => _textAftSort.ToString();
-        public string TextTree => _treeStr.InOrderTraversal;
-        public TreeStr TreeStr => _treeStr; 
+        public string TextTree => "Нужно сделать поиск";
+        public string TextCode => _codetext.ToString();
         public IList<BookRecordAdapterGetLastNameByte> ListBef => _listBef;
         public IList<BookRecordAdapterGetLastNameByte> ListAft => _listAft;
 
         private TextInfo _textAftSort;
         private TextInfo _textBefSort;
-
-        private TreeStr _treeStr;
+        private string _textCode;   
+        private int LengthCode = 0;
+        private int LengthChar = 0;
+        private CodeText _codetext;
 
         private IList<BookRecordAdapterGetLastNameByte> _listBef = new List<BookRecordAdapterGetLastNameByte>();
         private IList<BookRecordAdapterGetLastNameByte> _listAft = new List<BookRecordAdapterGetLastNameByte>();
-        private List<BookRecordAdapterGetLastNameByte> _listBook = new List<BookRecordAdapterGetLastNameByte>();
+        static private List<BookRecordAdapterGetLastNameByte> _listBook = new List<BookRecordAdapterGetLastNameByte>();
     }
 }

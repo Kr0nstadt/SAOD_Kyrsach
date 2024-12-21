@@ -66,10 +66,7 @@ class MainClass
         {
             Console.WriteLine(listBook[i]);
         }*/
-        TreeStr treeStr = new TreeStr();
-        treeStr.Add(copy);
-        treeStr.PrintTree();
-        treeStr.InOrderTraversalLeft();
+        
 
     }
 }

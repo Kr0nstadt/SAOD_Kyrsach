@@ -5,6 +5,14 @@ using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 using SAOD_Kyrsach.Tree;
+using System.Collections.Generic;
+using System.Text;
+using System.Collections;
+using SAOD_Kyrsach.BookRecord;
+using SAOD_Kyrsach.DigitalSort;
+using System.Threading.Tasks;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Visual
 {
@@ -14,6 +22,7 @@ namespace Visual
         {
             InitializeComponent();
         }
+
         private static int CountLineBef = 20;
         private static int CountLineAft = 20;
         public void ButtonClickedBef(object source, RoutedEventArgs args)
@@ -42,60 +51,58 @@ namespace Visual
             
             if(SearchBox.Text == null)
             {
-                SearchRes.Text = "Вы не ввели номер записи";
+                SearchRes.Text = "Вы не ввели фамилию не замечательного человека";
             }
-            if (Regex.IsMatch(SearchBox.Text, pattern) == false)
-            {
-                SearchRes.Text = "Не корректные входные значения";
-                
-            }
+
             else 
             {
                 Info info = new Info();
-                SearchRes.Text = new TextInfo(info.ListBef, ((Int32.Parse(SearchBox.Text) / 20) + 1) * 20, Int32.Parse(SearchBox.Text)-1).ToString();//будет пятая снизу запись
-                //SearchRes.Text =  info.ListBef[Int32.Parse(SearchBox.Text) + 1].ToString();
+                SearchRes.Text =  new Search(info.ListBef,SearchBox.Text).ToString();
             }
         }
         public void ButtonSearch2(object source, RoutedEventArgs args)
         {
             string pattern = @"^\d+$";
 
-            if (SearchBox.Text == null)
+            if (SearchBox2.Text == null)
             {
-                SearchRes2.Text = "Вы не ввели номер записи";
-            }
-            if (Regex.IsMatch(SearchBox2.Text, pattern) == false)
-            {
-                SearchRes2.Text = "Не корректные входные значения";
-
+                SearchRes2.Text = "Вы не ввели фамилию не замечательного человека";
             }
             else
             {
                 Info info = new Info();
-                SearchRes2.Text = new TextInfo(info.ListAft, ((Int32.Parse(SearchBox2.Text) / 20 ) + 1)*20 , Int32.Parse(SearchBox2.Text) - 1).ToString();//будет пятая снизу запись
-                //SearchRes.Text =  info.ListBef[Int32.Parse(SearchBox.Text) + 1].ToString();
+                var search = new Search(info.ListAft, SearchBox2.Text);
+                SearchRes2.Text = search.ToString();
+                SearchSortList = search.SearchList;
             }
         }
-
+        private IList<BookRecordAdapterGetLastNameByte> SearchSortList = new List<BookRecordAdapterGetLastNameByte>();
         public void ButtonTree(object source, RoutedEventArgs args)
+        {
+                var treelist = new TreeStr();
+                treelist.Add(SearchSortList);
+                treelist.InOrderTraversalLeftString();
+                TextBlockTree.Text = treelist.InOrderTraversal + "____________________________________________________________________________________________________________";
+        }
+
+        public void ButtonTree2(object source, RoutedEventArgs args)
         {
             string pattern = @"^\d+$";
 
-            if (SearchBox.Text == null)
+            if (SearchBox2.Text == null)
             {
-                TreeSearchRes.Text = "Вы не фамилию не замечательного человека";
+                TreeSearchRes.Text = "Вы не ввели фамилию замечательного человека";
             }
-            if (Regex.IsMatch(TreeTextBox.Text, pattern) == true)
+            if (!Regex.IsMatch(TreeTextBox2.Text, pattern))
             {
-                TreeSearchRes.Text = "Не корректные входные значения";
-
+                TreeSearchRes.Text = "Можно вводить только цифорки";
             }
             else
             {
-                Info info = new Info();
-                TreeStr tree = info.TreeStr;
-                var res = tree.Search(TreeTextBox.Text.ToString());
-                TreeSearchRes.Text = tree.ToString() + "____________________________________________________________________________________________________________";
+                TreeStr tree = new TreeStr();
+                tree.Add(SearchSortList);
+                var res = tree.Search(TreeTextBox2.Text.ToString());
+                TreeSearchRes.Text = tree.ToString() + "\n____________________________________________________________________________________________________________";
 
 
             }
